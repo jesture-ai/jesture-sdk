@@ -1,6 +1,6 @@
 # jesture-sdk
 
-Official repo for Jesture AI SDK.
+Official repo of Jesture AI SDK.
 
 ## MacOS howto
 
