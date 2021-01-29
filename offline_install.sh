@@ -34,5 +34,3 @@ tar -xvzf ${ORT_ARCHIVE_PATH} -C ${INSTALL_DIR}
 
 # Note: Mandatory step, this path is required by jesture_sdk.dylib.
 ln -s ${INSTALL_DIR}/onnxruntime@1.3/ ${LINK_DIR}/onnxruntime@1.3
-
-

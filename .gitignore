@@ -1,3 +1,8 @@
+# -------------- Custom - Jesture SDK related --------------
+
+/mediapipe
+/third_party
+
 # -------------- MacOS-specific ignore --------------
 
 # General
@@ -62,3 +67,5 @@ Temporary Items
 *.out
 *.app
 
+# Jupyter notebook
+/.ipynb_checkpoints
