@@ -2,6 +2,8 @@
 
 /mediapipe
 /third_party
+main_full_cpu
+full_cpu.dylib
 
 # -------------- MacOS-specific ignore --------------
 

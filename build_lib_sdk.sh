@@ -22,10 +22,10 @@ sudo install_name_tool -change \
 	/usr/local/opt/jestureai/onnxruntime@1.3/lib/libonnxruntime.1.3.0.dylib \
 	${JESTURE_SDK_ROOT}/$BIN_NAME
 
-sudo install_name_tool -rpath \
-	@loader_path/../../../../_solib_darwin_x86_64/_U@macos_Uonnxruntime_S_S_Connxruntime___Umacos_Uonnxruntime_Slib \
-	/usr/local/opt/jestureai/onnxruntime@1.3 \
-	${JESTURE_SDK_ROOT}/$BIN_NAME
+#sudo install_name_tool -rpath \
+#	@loader_path/../../../../_solib_darwin_x86_64/_U@macos_Uonnxruntime_S_S_Connxruntime___Umacos_Uonnxruntime_Slib \
+#	/usr/local/opt/jestureai/onnxruntime@1.3 \
+#	${JESTURE_SDK_ROOT}/$BIN_NAME
 
 # --- Correct paths to opencv shared libraries ---
 
@@ -36,7 +36,7 @@ for val in ${StringArray[@]}; do
 	${JESTURE_SDK_ROOT}/$BIN_NAME
 done
 
-sudo install_name_tool -rpath \
-	@loader_path/../../../../_solib_darwin_x86_64/_U@macos_Uopencv_S_S_Copencv___Umacos_Uopencv_Slib \
-	/usr/local/opt/jestureai/opencv@3/lib \
-	${JESTURE_SDK_ROOT}/$BIN_NAME
+#sudo install_name_tool -rpath \
+#	@loader_path/../../../../_solib_darwin_x86_64/_U@macos_Uopencv_S_S_Copencv___Umacos_Uopencv_Slib \
+#	/usr/local/opt/jestureai/opencv@3/lib \
+#	${JESTURE_SDK_ROOT}/$BIN_NAME
