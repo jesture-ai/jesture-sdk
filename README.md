@@ -23,9 +23,14 @@ sudo rm -r jesturesdk-osx-x64-0.1.0  # remove the folder with the SDK
 ### Make new release (if you are the SDK developer)
 
 ```
-sudo bash build_sdk.sh main_full_cpu  # build executable, move and change dynamic lybraries paths
-sudo bash build_sdk.sh full_cpu.dylib  # build shared object, move and change dynamic lybraries paths
-sudo bash make_release.sh  # zip all dependencies and SDK binary
+# build executable, move and change dynamic lybraries paths
+sudo bash build_sdk.sh main_full_cpu 
+
+# build shared object, move and change dynamic lybraries paths
+sudo bash build_sdk.sh full_cpu.dylib  
+
+# zip all dependencies and SDK binary
+sudo bash make_release.sh  
 ```
 
 If you made some changes to the dependencies (onnxruntime, OpenCV), check if all the files are in corresponding folders in `third_party/` folder and execute:
