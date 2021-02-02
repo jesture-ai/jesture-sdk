@@ -9,7 +9,7 @@ Official repo of Jesture AI SDK.
 ```
 unzip jesturesdk-osx-x64-0.1.0.zip
 sudo bash offline_install.sh
-GLOG_logtostderr=1 ./full_main_cpu --cam_device_id=ID
+GLOG_logtostderr=1 ./main_full_cpu --cam_device_id=ID
 ```
 
 ### Deinstall
@@ -23,7 +23,8 @@ sudo rm -r jesturesdk-osx-x64-0.1.0  # remove the folder with the SDK
 ### Make new release (if you are the SDK developer)
 
 ```
-sudo bash build_sdk.sh  # build, move and change dynamic lybraries paths
+sudo bash build_sdk.sh main_full_cpu  # build executable, move and change dynamic lybraries paths
+sudo bash build_sdk.sh full_cpu.dylib  # build shared object, move and change dynamic lybraries paths
 sudo bash make_release.sh  # zip all dependencies and SDK binary
 ```
 
