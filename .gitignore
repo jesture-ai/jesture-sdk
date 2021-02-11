@@ -1,9 +1,13 @@
 # -------------- Custom - Jesture SDK related --------------
 
-/mediapipe
-/third_party
+**/mediapipe
+**/third_party
 main_full_cpu
-full_cpu.dylib
+**/full_cpu.dylib
+
+# ------------- Python-specific ignore -------------
+
+**/__pycache__
 
 # -------------- MacOS-specific ignore --------------
 
@@ -70,4 +74,4 @@ Temporary Items
 *.app
 
 # Jupyter notebook
-/.ipynb_checkpoints
+**/.ipynb_checkpoints
