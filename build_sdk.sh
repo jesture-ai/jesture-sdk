@@ -5,12 +5,15 @@ BIN_NAME="$1"
 PATH_TO_BIN="$MEDIAPIPE_ROOT/bazel-bin/mediapipe/examples/desktop/holistic_tracking/$BIN_NAME"
 
 echo "--- Build the target SDK binary file ---"
+echo "> Changing dir to $MEDIAPIPE_ROOT"
 cd ${MEDIAPIPE_ROOT}
 bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 --copt="-DENABLE_DRAFTS=OFF" \
 mediapipe/examples/desktop/holistic_tracking:$BIN_NAME
 
 echo "--- Copy binary to the target dir ---"
+echo "> Changing dir to $JESTURE_SDK_ROOT"
 cd ${JESTURE_SDK_ROOT}
+echo "> Copying $PATH_TO_BIN to $JESTURE_SDK_ROOT"
 cp ${PATH_TO_BIN} ${JESTURE_SDK_ROOT}
 
 echo "--- Correct paths to onnxruntime shared libraries ---"
