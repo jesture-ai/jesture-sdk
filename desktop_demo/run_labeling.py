@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 from skimage import io
 import numpy as np
+import argparse
+import datetime
 import pickle
 import time
 import cv2
@@ -16,6 +18,12 @@ from webcam_draw import WebcamDrawStream
 print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
 
 
+# pasrse args
+parser = argparse.ArgumentParser(description='Collect hand keypoints data for gesture recognition fitting.')
+parser.add_argument('--cam_id', type=int, default=1)
+args = parser.parse_args()
+
+
 # create the application window
 name = 'JestureSDK: Python Demo'
 width, height = (640, 480)
@@ -23,30 +31,33 @@ cv2.namedWindow(name, cv2.WINDOW_NORMAL)
 cv2.resizeWindow(name, (width+40, height+20))
 cv2.startWindowThread()
 
-data_file_name = './hand_keypoints_dataset_v1.pkl'
+# set the data file
+now = datetime.datetime.now()
+dt = f'{now.day:02d}{now.month:02d}{now.year%100:02d}_{now.hour:02d}_{now.minute:02d}'
+data_file_name = f'hand_kps_v1_{dt}.pkl'
 
 # set the logo stuff
-design_root = '/Users/izakharkin/Desktop/deepjest/_design'
-logo_path = f'{design_root}/wix/jesture_ai_logo_comfortaa/jesture_logo_comfortaa-removebg.png'
+logo_path = f'jesture_logo_comfortaa-removebg.png'
 logo_img, logo_alpha = load_image_with_alpha(logo_path, remove_borders=True)
 logo_loc = (10, 10)
 
 # set the gestures help stuff
 key_to_idx = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
-              '6': 6, '7': 7, '8': 8, '9': 9, 'f': 10, 'u': 11, 
-              'd': 12, 'c': 13}
+              '6': 6, '7': 7, '8': 8, '9': 9, 'f': 10, 'g': 11, 
+              'd': 12, 'c': 13, 'h': 14}
 key_ords = [ord(x) for x in key_to_idx]
-idx_to_gesture = {0: 'horns', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 
-                  5: 'five', 6: 'fist', 7: 'piece', 8: 'love', 9: 'ok', 
-                  10: 'fuck', 11: 'thumb_up', 12: 'thumb_down', 13: 'call_me'}
-help_textlist = [f'{k}: {idx_to_gesture[key_to_idx[k]]}' for k in key_to_idx]
-help_textlist_str = '\n'.join(help_textlist)
+idx_to_gesture = {0: 'no_gesture', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 
+                  5: 'five', 6: 'fist', 7: 'peace', 8: 'love', 9: 'ok', 
+                  10: 'fuck', 11: '1-gun', 12: '2-gun', 13: 'call_me', 14: 'horns'}
+idx_to_count = {k: 0 for k in idx_to_gesture}
+# help_textlist = [f'{k}: {idx_to_gesture[key_to_idx[k]]} {idx_to_count[key_to_idx[k]]}' for k in key_to_idx]
+# help_textlist_str = '\n'.join(help_textlist)
 
 help_box_width = 175
-help_box_tl = {'right': (10, height//5+20), 
-               'left': (width-help_box_width, height//5+20)}
-help_box_br = {'right': (10+help_box_width, height-height//5+60), 
-               'left': (width, height-height//5+60)}
+help_box_tl = {'right': (10, height//5+10), 
+               'left': (width-help_box_width, height//5+10)}
+help_box_br = {'right': (10+help_box_width, height-30), 
+               'left': (width, height-30)}
 help_text_loc = {'right': (help_box_tl['right'][0]+10, help_box_tl['right'][1]+10),
                  'left': (help_box_tl['left'][0]+10, help_box_tl['left'][1]+10)}
 help_font = ImageFont.truetype("Comfortaa-Light.ttf", 20)
@@ -60,9 +71,12 @@ hand_box_br = {'right': (width, height),
                'left': (width//3, height)}
 
 # set the hand type stuff
-handtype_text = {"right": "Right hand capture (L/R key)", 
-                 "left": "Left hand capture (L/R key)"}
+handtype_text = {"right": "Right hand capture (L/R)", 
+                 "left": "Left hand capture (L/R)"}
 handtype_text_loc = (width//2, 25)
+
+# set the counter stuff
+count_text_loc = (width//3, 25)
 
 # set common font
 font = ImageFont.truetype("Comfortaa-Light.ttf", 24)
@@ -80,13 +94,13 @@ i = 0
 
 if __name__ == "__main__":
     # start Jesture SDK Python runner
-    jesture_runner = JestureSdkRunner(cam_id=1)
+    jesture_runner = JestureSdkRunner(cam_id=args.cam_id)
     jesture_runner.start_recognition()
     time.sleep(3)
     
     # start reading frames to display in the application window
     cap = WebcamDrawStream(
-        jesture_runner, cam_id=1, width=width, height=height,
+        jesture_runner, cam_id=args.cam_id, width=width, height=height,
         hand_box_tl=mid_hand_box_tl, hand_box_br=mid_hand_box_br,
         draw_hand_box=False
     )
@@ -94,12 +108,10 @@ if __name__ == "__main__":
     time.sleep(5)
 
     # start the main loop
+    time.sleep(3)
     while(True):
         if cap.frame is None:
             continue
-
-        # cap.hand_box_tl = hand_box_tl[hand_type]
-        # cap.hand_box_br = hand_box_br[hand_type]
 
         # get current webcam image with drawn hand skeletons
         frame = cap.frame[:,::-1,:] if selfie_mode else cap.frame
@@ -116,7 +128,11 @@ if __name__ == "__main__":
 
         # draw text
         draw.multiline_text(handtype_text_loc, handtype_text[hand_type], 
-                            font=font, fill=(255, 255, 255))
+                            font=font, fill=(255, 255, 255, 200))
+
+        help_textlist = [f'{idx_to_count[key_to_idx[k]]} | {k}: {idx_to_gesture[key_to_idx[k]]}' 
+                         for k in key_to_idx]
+        help_textlist_str = '\n'.join(help_textlist)
         draw.multiline_text(help_text_loc[hand_type], help_textlist_str, 
                             font=help_font, fill=(255, 255, 255))
 
@@ -133,9 +149,8 @@ if __name__ == "__main__":
         # retrieve if gesture key is pressed
         if chr(c) in key_to_idx:
             k, v = chr(c), idx_to_gesture[key_to_idx[chr(c)]]
-            pressed_text = f'{k}: {v}'
-            notify_textlist_str = "\n".join(
-                [x if x == pressed_text else "" for x in help_textlist])
+            pressed_text = f'{idx_to_count[key_to_idx[k]]} | {k}: {v}'
+            idx_to_count[key_to_idx[k]] += 1
             pressed_duration = 4
             print(f"pressed {pressed_text}, shape: {frame.size}")
             data_list.append({
@@ -158,6 +173,8 @@ if __name__ == "__main__":
 
         # draw notification text if key was pressed less then 12 frames ago
         if pressed_duration > 0:
+            notify_textlist_str = "\n".join(
+                [x if x == pressed_text else "" for x in help_textlist])
             draw.multiline_text(help_text_loc[hand_type], notify_textlist_str, 
                                 font=help_font, fill=(235, 190, 63))
             pressed_duration -= 1
