@@ -1,0 +1,183 @@
+from PIL import Image, ImageDraw, ImageFont
+import matplotlib.pyplot as plt
+from skimage import io
+import numpy as np
+import pickle
+import time
+import cv2
+
+from thread_camera import ThreadCamera
+from utils import load_image_with_alpha, overlay_alpha
+from utils import draw_text, draw_multiline_text, draw_skeleton
+
+from jesture_sdk_python import JestureSdkRunner
+from webcam_draw import WebcamDrawStream
+
+print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
+
+
+# create the application window
+name = 'JestureSDK: Python Demo'
+width, height = (640, 480)
+cv2.namedWindow(name, cv2.WINDOW_NORMAL)
+cv2.resizeWindow(name, (width+40, height+20))
+cv2.startWindowThread()
+
+data_file_name = './hand_keypoints_dataset_v1.pkl'
+
+# set the logo stuff
+design_root = '/Users/izakharkin/Desktop/deepjest/_design'
+logo_path = f'{design_root}/wix/jesture_ai_logo_comfortaa/jesture_logo_comfortaa-removebg.png'
+logo_img, logo_alpha = load_image_with_alpha(logo_path, remove_borders=True)
+logo_loc = (10, 10)
+
+# set the gestures help stuff
+key_to_idx = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
+              '6': 6, '7': 7, '8': 8, '9': 9, 'f': 10, 'u': 11, 
+              'd': 12, 'c': 13}
+key_ords = [ord(x) for x in key_to_idx]
+idx_to_gesture = {0: 'horns', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 
+                  5: 'five', 6: 'fist', 7: 'piece', 8: 'love', 9: 'ok', 
+                  10: 'fuck', 11: 'thumb_up', 12: 'thumb_down', 13: 'call_me'}
+help_textlist = [f'{k}: {idx_to_gesture[key_to_idx[k]]}' for k in key_to_idx]
+help_textlist_str = '\n'.join(help_textlist)
+
+help_box_width = 175
+help_box_tl = {'right': (10, height//5+20), 
+               'left': (width-help_box_width, height//5+20)}
+help_box_br = {'right': (10+help_box_width, height-height//5+60), 
+               'left': (width, height-height//5+60)}
+help_text_loc = {'right': (help_box_tl['right'][0]+10, help_box_tl['right'][1]+10),
+                 'left': (help_box_tl['left'][0]+10, help_box_tl['left'][1]+10)}
+help_font = ImageFont.truetype("Comfortaa-Light.ttf", 20)
+
+# set the scaled hands stuff
+mid_hand_box_tl = (width//3, height-height//5)
+mid_hand_box_br = (2*width//3, height)
+hand_box_tl = {'right': (2*width//3, height-height//5),
+               'left': (0, height-height//5)}
+hand_box_br = {'right': (width, height),
+               'left': (width//3, height)}
+
+# set the hand type stuff
+handtype_text = {"right": "Right hand capture (L/R key)", 
+                 "left": "Left hand capture (L/R key)"}
+handtype_text_loc = (width//2, 25)
+
+# set common font
+font = ImageFont.truetype("Comfortaa-Light.ttf", 24)
+
+# variables used in the main loop
+pressed_duration = 0
+pressed_text = ''
+
+selfie_mode = True
+hand_type = 'right'
+data_list = []
+prev_k = ''
+i = 0
+
+
+if __name__ == "__main__":
+    # start Jesture SDK Python runner
+    jesture_runner = JestureSdkRunner(cam_id=1)
+    jesture_runner.start_recognition()
+    time.sleep(3)
+    
+    # start reading frames to display in the application window
+    cap = WebcamDrawStream(
+        jesture_runner, cam_id=1, width=width, height=height,
+        hand_box_tl=mid_hand_box_tl, hand_box_br=mid_hand_box_br,
+        draw_hand_box=False
+    )
+    cap.start()
+    time.sleep(5)
+
+    # start the main loop
+    while(True):
+        if cap.frame is None:
+            continue
+
+        # cap.hand_box_tl = hand_box_tl[hand_type]
+        # cap.hand_box_br = hand_box_br[hand_type]
+
+        # get current webcam image with drawn hand skeletons
+        frame = cap.frame[:,::-1,:] if selfie_mode else cap.frame
+
+        # draw logo
+        frame = overlay_alpha(logo_img[:,:,::-1], logo_alpha, frame, loc=logo_loc, alpha=1.0)
+
+        # draw ui elements
+        frame = Image.fromarray(frame if type(np.array([])) == type(frame) else frame.get())
+        draw = ImageDraw.Draw(frame, "RGBA")
+        draw.rectangle((help_box_tl[hand_type], help_box_br[hand_type]), 
+                       fill=(0, 0, 0, 127), outline=(235, 190, 63, 255))
+        # draw.rectangle((hand_box_tl, hand_box_br), fill=(0, 0, 0, 127), outline=(235, 190, 63, 255))
+
+        # draw text
+        draw.multiline_text(handtype_text_loc, handtype_text[hand_type], 
+                            font=font, fill=(255, 255, 255))
+        draw.multiline_text(help_text_loc[hand_type], help_textlist_str, 
+                            font=help_font, fill=(255, 255, 255))
+
+        # retrieve keyboard signal
+        c = cv2.waitKey(1) % 256
+        if c == ord('q'):
+            break
+
+        if c == ord('l'):
+            hand_type = 'left'
+        if c == ord('r'):
+            hand_type = 'right'
+
+        # retrieve if gesture key is pressed
+        if chr(c) in key_to_idx:
+            k, v = chr(c), idx_to_gesture[key_to_idx[chr(c)]]
+            pressed_text = f'{k}: {v}'
+            notify_textlist_str = "\n".join(
+                [x if x == pressed_text else "" for x in help_textlist])
+            pressed_duration = 4
+            print(f"pressed {pressed_text}, shape: {frame.size}")
+            data_list.append({
+                'hand_type': hand_type,
+                'gesture_id': key_to_idx[k],
+                'gesture_name': v,
+                'pred_gesture_name': jesture_runner.get_gesture(
+                    f'{hand_type}_static'),
+                'keypoints': jesture_runner.get_hand_keypoints(
+                    f'{hand_type}_keypoints', mirror=False),
+                'scaled_keypoints': jesture_runner.get_hand_keypoints(
+                    f'scaled_{hand_type}_keypoints', mirror=False),
+            })
+            # save current data to not to lose it 
+            # in case if the program accidentally exited
+            if k != prev_k:
+                with open(data_file_name, 'wb') as file:
+                    pickle.dump(data_list, file)
+            prev_k = k
+
+        # draw notification text if key was pressed less then 12 frames ago
+        if pressed_duration > 0:
+            draw.multiline_text(help_text_loc[hand_type], notify_textlist_str, 
+                                font=help_font, fill=(235, 190, 63))
+            pressed_duration -= 1
+
+        frame = np.array(frame).astype(np.uint8)
+        cv2.imshow(name, frame)
+
+        i += 1
+
+    # save all data collected
+    with open(data_file_name, 'wb') as file:
+        print(f'Dumping {len(data_list)} items to {data_file_name}...')
+        pickle.dump(data_list, file)
+        print(f'Dumped.')
+
+    # finish and close all resources
+    cap.stop()
+    jesture_runner.stop_recognition()
+
+    cv2.waitKey(1)
+    cv2.destroyWindow(name)
+    cv2.destroyAllWindows()
+    cv2.waitKey(1)
