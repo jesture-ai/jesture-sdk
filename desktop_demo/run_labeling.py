@@ -27,8 +27,8 @@ args = parser.parse_args()
 # create the application window
 name = 'JestureSDK: Python Demo'
 width, height = (640, 480)
-cv2.namedWindow(name, cv2.WINDOW_NORMAL)
-cv2.resizeWindow(name, (width+40, height+20))
+cv2.namedWindow(name)
+# cv2.resizeWindow(name, (width, height))
 cv2.startWindowThread()
 
 # set the data file
@@ -160,9 +160,9 @@ if __name__ == "__main__":
                 'pred_gesture_name': jesture_runner.get_gesture(
                     f'{hand_type}_static'),
                 'keypoints': jesture_runner.get_hand_keypoints(
-                    f'{hand_type}_keypoints', mirror=False),
+                    f'{hand_type}_keypoints'),
                 'scaled_keypoints': jesture_runner.get_hand_keypoints(
-                    f'scaled_{hand_type}_keypoints', mirror=False),
+                    f'scaled_{hand_type}_keypoints'),
             })
             # save current data to not to lose it 
             # in case if the program accidentally exited

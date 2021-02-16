@@ -49,6 +49,14 @@ dispose_full_cpu = jesture_lib.DisposeFullCpu
 dispose_full_cpu.argtypes = [ctypes.POINTER(ctypes.c_int)]
 dispose_full_cpu.restype = None
 
+get_camera_width = jesture_lib.GetCameraWidth
+get_camera_width.argtypes = [ctypes.POINTER(ctypes.c_int)]
+get_camera_width.restype = ctypes.c_int
+
+get_camera_height = jesture_lib.GetCameraHeight
+get_camera_height.argtypes = [ctypes.POINTER(ctypes.c_int)]
+get_camera_height.restype = ctypes.c_int
+
 # -------------- HANDS --------------
 
 # gestures
@@ -127,6 +135,12 @@ class JestureSdkRunner:
         logging.debug('[JestureSdkRunner] Recognition stopped.')
         self.thread.join()
         logging.debug('[JestureSdkRunner] Thread joined.')
+        
+    def get_camera_width(self):
+        return get_camera_width(self.instance)
+    
+    def get_camera_height(self):
+        return get_camera_height(self.instance)
     
     def get_gesture(self, gesture_type):
         '''
@@ -136,9 +150,7 @@ class JestureSdkRunner:
         method = JestureSdkRunner.GESTURE_METHOD_DICT[gesture_type]
         return method(self.instance).decode()
 
-    def get_hand_keypoints(self, keypoints_type, mirror=True, 
-                           img_width=640, img_height=480, 
-                           scale=None, shift=None):
+    def get_hand_keypoints(self, keypoints_type):
         '''
         Get hand keypoints by `keypoints_type`.
         '''
@@ -146,9 +158,5 @@ class JestureSdkRunner:
         method = JestureSdkRunner.HAND_KEYPOINTS_METHOD_DICT[keypoints_type]
         raw_keypoints = method(self.instance)
         keypoints = raw_keypoints.reshape(21, 3).copy()
-        if scale is not None and shift is not None:
-            keypoints = np.array([scale[0], scale[1], 1]) * keypoints + np.array([shift[0], shift[1], 0])
-        if mirror:
-            keypoints[:,0] = img_width - keypoints[:,0]
         return keypoints
     
