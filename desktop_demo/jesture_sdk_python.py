@@ -34,7 +34,7 @@ except OSError:
 # -------------- COMMON --------------
 
 create_full_cpu = jesture_lib.CreateFullCpu
-create_full_cpu.argtypes = [ctypes.c_int]
+create_full_cpu.argtypes = [ctypes.c_int, ctypes.c_bool, ctypes.c_bool, ctypes.c_bool]
 create_full_cpu.restype = ctypes.POINTER(ctypes.c_int)
 
 run_full_cpu = jesture_lib.RunFullCpu
@@ -111,9 +111,13 @@ class JestureSdkRunner:
         'right_static': get_static_right_gesture
     }
     
-    def __init__(self, cam_id):
+    def __init__(self, cam_id, 
+                 use_tracking=True, use_static_gestures=True, use_dynamic_gestures=True):
         self.cam_id = cam_id
-        self.instance = create_full_cpu(cam_id)
+        self.use_tracking = use_tracking
+        self.use_static_gestures = use_static_gestures
+        self.use_dynamic_gestures = use_dynamic_gestures
+        self.instance = create_full_cpu(cam_id, use_tracking, use_static_gestures, use_dynamic_gestures)
         logging.debug('[JestureSdkRunner] Instance created.')
 
     def start_recognition(self):
