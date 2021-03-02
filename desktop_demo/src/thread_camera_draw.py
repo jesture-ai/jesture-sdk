@@ -7,15 +7,13 @@ import matplotlib.pyplot as plt
 from skimage import io
 import numpy as np
 
-from thread_camera import ThreadCamera
-from utils import load_image_with_alpha, overlay_alpha
-from utils import draw_text, draw_multiline_text, draw_skeleton
+from .utils import draw_skeleton
 
 
 logging.basicConfig(level=logging.DEBUG, format='(%(threadName)-10s) %(message)s')
 
 
-class WebcamDrawStream:
+class ThreadCameraDraw:
     def __init__(self, jesture_runner, cam_id=0, width=640, height=480, 
                  hand_box_tl=None, hand_box_br=None, draw_hand_box=False, mirror=False):
         '''
@@ -46,16 +44,19 @@ class WebcamDrawStream:
         return keypoints
     
     def start(self):
-        logging.debug('[WebcamDrawStream] Starting a thread...')
+        logging.debug('[ThreadCameraDraw] Starting a thread...')
         self.thread = Thread(name='Camera-Draw Python Thread', target=self.update, args=())
         self.thread.start()
-        logging.debug('[WebcamDrawStream] Thread started.')
+        logging.debug('[ThreadCameraDraw] Thread started.')
         return self
     
     def update(self):
         logged = False
         while not self.stopped:
             (self.grabbed, frame) = self.stream.read()
+            
+            if not self.grabbed:
+                continue
             
             display_height, display_width = frame.shape[:2]
             if not logged:
@@ -120,18 +121,18 @@ class WebcamDrawStream:
             if not logged:
                 logged = True
             
-        logging.debug('[WebcamDrawStream] Frame loop finished.')
+        logging.debug('[ThreadCameraDraw] Frame loop finished.')
         self.stream.release()
-        logging.debug('[WebcamDrawStream] Capture released.')
+        logging.debug('[ThreadCameraDraw] Capture released.')
     
     def read(self):
         return self.frame
     
     def stop(self) :
-        logging.debug('[WebcamDrawStream] Stopping...')
+        logging.debug('[ThreadCameraDraw] Stopping...')
         self.stopped = True
         self.thread.join()
-        logging.debug('[WebcamDrawStream] Camera thread joined.')
+        logging.debug('[ThreadCameraDraw] Camera thread joined.')
         
 
     def __exit__(self, exc_type, exc_value, traceback):

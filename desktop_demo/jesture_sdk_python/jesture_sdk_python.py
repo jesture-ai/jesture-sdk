@@ -7,6 +7,7 @@ import shutil
 from threading import Thread
 import logging
 import time
+import os
 
 logging.basicConfig(level=logging.DEBUG, format='(%(threadName)-10s) %(message)s')
 
@@ -19,7 +20,7 @@ print('platform.mac_ver():', platform.mac_ver())
 
 # ------------ Jesture SDK setup ------------
 
-jesturesdk_lib_name = "full_cpu"
+jesturesdk_lib_name = os.path.join(os.path.dirname(__file__), "full_cpu")
 jesturesdk_lib_path = ctypes.util.find_library(jesturesdk_lib_name)
 if not jesturesdk_lib_path:
     print("Unable to find the specified library: {}".format(jesturesdk_lib_name))
@@ -111,8 +112,11 @@ class JestureSdkRunner:
         'right_static': get_static_right_gesture
     }
     
-    def __init__(self, cam_id, 
-                 use_tracking=True, use_static_gestures=True, use_dynamic_gestures=True):
+    def __init__(self, 
+                 cam_id=0, 
+                 use_tracking=True, 
+                 use_static_gestures=True, 
+                 use_dynamic_gestures=True):
         self.cam_id = cam_id
         self.use_tracking = use_tracking
         self.use_static_gestures = use_static_gestures

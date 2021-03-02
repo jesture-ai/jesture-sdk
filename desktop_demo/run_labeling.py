@@ -7,13 +7,16 @@ import datetime
 import pickle
 import time
 import cv2
+import sys
+import os
 
-from thread_camera import ThreadCamera
-from utils import load_image_with_alpha, overlay_alpha
-from utils import draw_text, draw_multiline_text, draw_skeleton
+sys.path.append(os.path.abspath(".."))
 
-from jesture_sdk_python import JestureSdkRunner
-from webcam_draw import WebcamDrawStream
+from src.utils import load_image_with_alpha, overlay_alpha
+from src.utils import draw_text, draw_multiline_text, draw_skeleton
+from src.thread_camera_draw import ThreadCameraDraw
+
+from jesture_sdk_python.jesture_sdk_python import JestureSdkRunner
 
 print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
 
@@ -37,7 +40,7 @@ dt = f'{now.day:02d}{now.month:02d}{now.year%100:02d}_{now.hour:02d}_{now.minute
 data_file_name = f'hand_kps_v1_{dt}.pkl'
 
 # set the logo stuff
-logo_path = f'jesture_logo_comfortaa-removebg.png'
+logo_path = 'images/jesture_logo.png'
 logo_img, logo_alpha = load_image_with_alpha(logo_path, remove_borders=True)
 logo_loc = (10, 10)
 
@@ -60,7 +63,7 @@ help_box_br = {'right': (10+help_box_width, height-30),
                'left': (width, height-30)}
 help_text_loc = {'right': (help_box_tl['right'][0]+10, help_box_tl['right'][1]+10),
                  'left': (help_box_tl['left'][0]+10, help_box_tl['left'][1]+10)}
-help_font = ImageFont.truetype("Comfortaa-Light.ttf", 20)
+help_font = ImageFont.truetype("fonts/Comfortaa-Light.ttf", 20)
 
 # set the scaled hands stuff
 mid_hand_box_tl = (width//3, height-height//5)
@@ -79,7 +82,7 @@ handtype_text_loc = (width//2, 25)
 count_text_loc = (width//3, 25)
 
 # set common font
-font = ImageFont.truetype("Comfortaa-Light.ttf", 24)
+font = ImageFont.truetype("fonts/Comfortaa-Light.ttf", 24)
 
 # variables used in the main loop
 pressed_duration = 0
@@ -99,16 +102,15 @@ if __name__ == "__main__":
     time.sleep(3)
     
     # start reading frames to display in the application window
-    cap = WebcamDrawStream(
+    cap = ThreadCameraDraw(
         jesture_runner, cam_id=args.cam_id, width=width, height=height,
         hand_box_tl=mid_hand_box_tl, hand_box_br=mid_hand_box_br,
         draw_hand_box=False
     )
     cap.start()
-    time.sleep(5)
+    time.sleep(3)
 
     # start the main loop
-    time.sleep(3)
     while(True):
         if cap.frame is None:
             continue
