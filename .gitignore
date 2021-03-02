@@ -2,8 +2,11 @@
 
 **/mediapipe
 **/third_party
-main_full_cpu
+**/main_full_cpu
+**/main_mediapipe
 **/full_cpu.dylib
+**/err.txt
+**/out.txt
 
 # ------------- Python-specific ignore -------------
 
