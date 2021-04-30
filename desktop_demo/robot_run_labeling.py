@@ -39,7 +39,7 @@ data_dir = './out_data'
 os.makedirs(data_dir, exist_ok=True)
 now = datetime.datetime.now()
 dt = f'{now.day:02d}{now.month:02d}{now.year%100:02d}_{now.hour:02d}_{now.minute:02d}'
-data_file_name = f'{data_dir}/hand_keypoints_{dt}.pkl'
+data_file_name = f'{data_dir}/robot_hand_keypoints_{dt}.pkl'
 
 # set the logo stuff
 logo_path = 'images/jesture_logo.png'
@@ -47,13 +47,9 @@ logo_img, logo_alpha = load_image_with_alpha(logo_path, remove_borders=True)
 logo_loc = (10, 10)
 
 # set the gestures help stuff
-key_to_idx = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
-              '6': 6, '7': 7, '8': 8, '9': 9, 'f': 10, 'g': 11, 
-              'd': 12, 'c': 13, 'h': 14}
+key_to_idx = {'0': 0, '1': 1, '2': 2, '3': 3}
 key_ords = [ord(x) for x in key_to_idx]
-idx_to_gesture = {0: 'no_gesture', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 
-                  5: 'five', 6: 'fist', 7: 'peace', 8: 'love', 9: 'ok', 
-                  10: 'fuck', 11: '1-gun', 12: '2-gun', 13: 'call_me', 14: 'horns'}
+idx_to_gesture = {0: 'no_gesture', 1: 'move', 2: 'angle', 3: 'grab'}
 idx_to_count = {k: 0 for k in idx_to_gesture}
 # help_textlist = [f'{k}: {idx_to_gesture[key_to_idx[k]]} {idx_to_count[key_to_idx[k]]}' for k in key_to_idx]
 # help_textlist_str = '\n'.join(help_textlist)
