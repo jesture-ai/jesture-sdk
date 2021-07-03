@@ -1,5 +1,6 @@
 # -------------- Custom - Jesture SDK related --------------
 
+*.zip
 **/mediapipe
 **/third_party
 **/main_full_cpu
