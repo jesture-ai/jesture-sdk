@@ -4,12 +4,11 @@
 
 <!-- [![JestureAiSdkReadmeHeaderGithub](https://user-images.githubusercontent.com/17500203/124357142-a6c72580-dc22-11eb-8838-b59ca69ef1f6.png)](https://github.com/jesture-ai/jesture-sdk) -->
 
-**Gesture control made accessible and convenient.**
+**Gesture control made accessible.**
 
 [![YouTube](https://img.shields.io/badge/videos-youtube-white)](https://www.youtube.com/watch?v=sxaZ_yLgtLk&list=PL4Z9jysfxyfj9F1Kfdy_4oXKX9-MESCpP&index=1)
 [![Twitter](https://img.shields.io/badge/news-twitter-1DA1F2)](https://twitter.com/jestureai)
 [![Website](https://img.shields.io/badge/official-website-3fbeeb)](https://www.jesture.ai)
-[![Patreon](https://badgen.net/badge/become/a%20patron/F96854)](https://www.patreon.com/jestureai)
 [![Instagram](https://img.shields.io/badge/follow-instagram-bc2a8d)](https://www.instagram.com/jesture.ai)
   
 </div>
@@ -29,7 +28,9 @@ Music Control | Snap Masks
 :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------:
 ![slides](docs/gifs/itunes.gif)| ![snap](docs/gifs/snap-zoom.gif)
 
-## MacOS howto
+## Install
+
+### MacOS
 
 1. Clone this repo: `git clone https://github.com/jesture-ai/jesture-sdk`
 2. Download the latest version of SDK from the [Releases](https://github.com/jesture-ai/jesture-sdk/releases) page
@@ -44,13 +45,12 @@ jesture_sdk/
 |-- third_party/
 ```
 5. Install the dependencies: `sudo bash install.sh`
-6. You are all set! Checkout e.g. python_demo to learn how to run the SDK in Python.
-
-Note that during the installation step the `jestureai/` folder is being created at `/usr/local/Cellar/` and `/usr/local/opt/`, which may require the priviledged access (`sudo`). The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths.
+6. You are all set! Checkout the [python_demo](https://github.com/jesture-ai/jesture-sdk/tree/main/python_demo) to learn how to run the SDK in Python.
 
 If one wish to remove all the dependencies: `sudo bash remove.sh`.
 
-## Windows howto
+**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To acces them it requires priviledged access (`sudo`).
+
+### Windows
 
 SDK is not yet available on Windows. Stay tuned!
-
