@@ -58,7 +58,7 @@ jesture_runner = JestureSdkRunner(
 jesture_runner.start_recognition()
 
 # start reading frames to display in the application window
-cap = ThreadCamera(cam_id=1, width=width, height=height)
+cap = ThreadCamera(cam_id=args.cam_id, width=width, height=height)
 cap.start()
 
 
