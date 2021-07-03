@@ -9,7 +9,6 @@
 [![YouTube](https://img.shields.io/badge/videos-youtube-white)](https://www.youtube.com/watch?v=sxaZ_yLgtLk&list=PL4Z9jysfxyfj9F1Kfdy_4oXKX9-MESCpP&index=1)
 [![Twitter](https://img.shields.io/badge/news-twitter-1DA1F2)](https://twitter.com/jestureai)
 [![Website](https://img.shields.io/badge/official-website-3fbeeb)](https://www.jesture.ai)
-[![Patreon](https://badgen.net/badge/become/a%20patron/F96854)](https://www.patreon.com/jestureai)
 [![Instagram](https://img.shields.io/badge/follow-instagram-bc2a8d)](https://www.instagram.com/jesture.ai)
   
 </div>
