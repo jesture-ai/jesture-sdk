@@ -29,7 +29,9 @@ Music Control | Snap Masks
 :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------:
 ![slides](docs/gifs/itunes.gif)| ![snap](docs/gifs/snap-zoom.gif)
 
-## MacOS howto
+## Install
+
+### MacOS
 
 1. Clone this repo: `git clone https://github.com/jesture-ai/jesture-sdk`
 2. Download the latest version of SDK from the [Releases](https://github.com/jesture-ai/jesture-sdk/releases) page
@@ -50,7 +52,6 @@ If one wish to remove all the dependencies: `sudo bash remove.sh`.
 
 **Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To acces them it requires priviledged access (`sudo`).
 
-## Windows howto
+### Windows
 
 SDK is not yet available on Windows. Stay tuned!
-
