@@ -1,9 +1,4 @@
 #!/bin/bash
-#
-# Copyright (c) Jesture AI Inc. All rights reserved.
-#
-# See the license details in LICENSE.md.
-#
 
 INSTALL_DIR=/usr/local/Cellar/jestureai/
 LINK_DIR=/usr/local/opt/jestureai/
