@@ -1,15 +1,14 @@
 # -------------- Custom - Jesture SDK related --------------
 
 *.zip
-**/mediapipe
-**/third_party
-**/main_full_cpu
-**/main_mediapipe
-**/full_cpu.dylib
+*.dylib
 **/err.txt
 **/out.txt
-**/desktop_demo/netron
-**/desktop_demo/out_data
+
+**/dev
+**/misc
+**/mediapipe
+**/third_party
 
 # ------------- Python-specific ignore -------------
 
