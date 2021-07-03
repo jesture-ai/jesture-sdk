@@ -49,7 +49,7 @@ jesture_sdk/
 
 If one wish to remove all the dependencies: `sudo bash remove.sh`.
 
-**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To acces them it requires priviledged access (`sudo`).
+**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To access them it requires priviledged access (`sudo`).
 
 ### Windows
 
