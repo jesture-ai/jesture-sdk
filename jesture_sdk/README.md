@@ -1,6 +1,6 @@
 # jesture_sdk
 
-The SDK itself for now consists of full_cpu.dylib file and mediapipe/ folder. Please check [Install](https://github.com/jesture-ai/jesture-sdk#install) section on how to get them.
+The SDK itself consists of `full_cpu.dylib` file and `mediapipe/` folder. Please check the [Install](https://github.com/jesture-ai/jesture-sdk#install) section on how to get them.
 
 ## Table of Available Gestures:
 
