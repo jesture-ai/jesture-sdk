@@ -5,11 +5,18 @@
 **/err.txt
 **/out.txt
 
-**/misc
-**/releases
+**/jesture_sdk/dev
+**/jesture_sdk/misc
+**/jesture_sdk/releases
+**/jesture_sdk/mediapipe
+**/jesture_sdk/third_party
 
-**/mediapipe
-**/third_party
+**/python_demo/emoji
+**/python_demo/out_data
+**/python_demo/label_tool
+**/python_demo/netron
+**/python_demo/notebooks
+**/python_demo/mediapipe
 
 # ------------- Python-specific ignore -------------
 
