@@ -12,9 +12,9 @@ The SDK itself consists of `full_cpu.dylib` file and `mediapipe/` folder. Please
 | Swipe Down | ONE  | 
 | Swipe Left | TWO | 
 | Swipe Right | THREE | 
-| Sliding Two Fingers Up | SPIDERMAN :love_you_gesture: | 
-| Sliding Two Fingers Down |  | 
-| Sliding Two Fingers Left |  | 
+| Sliding Two Fingers Up | FOUR | 
+| Sliding Two Fingers Down | FIVE | 
+| Sliding Two Fingers Left | SPIDERMAN :love_you_gesture: | 
 | Sliding Two Fingers Right |  | 
 | Zooming Out With Two Fingers |  | 
 | Zooming In With Two Fingers |  | 
