@@ -44,11 +44,11 @@ jesture_sdk/
 |-- third_party/
 ```
 5. Install the dependencies: `sudo bash install.sh`
-6. You are all set! Checkout e.g. python_demo to learn how to run the SDK in Python.
-
-Note that during the installation step the `jestureai/` folder is being created at `/usr/local/Cellar/` and `/usr/local/opt/`, which may require the priviledged access (`sudo`). The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths.
+6. You are all set! Checkout the [python_demo](https://github.com/jesture-ai/jesture-sdk/tree/main/python_demo) to learn how to run the SDK in Python.
 
 If one wish to remove all the dependencies: `sudo bash remove.sh`.
+
+**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To acces them it requires priviledged access (`sudo`).
 
 ## Windows howto
 
