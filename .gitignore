@@ -1,0 +1,90 @@
+# -------------- Custom - Jesture SDK related --------------
+
+*.zip
+*.dylib
+**/err.txt
+**/out.txt
+
+**/jesture_sdk/dev
+**/jesture_sdk/misc
+**/jesture_sdk/releases
+**/jesture_sdk/mediapipe
+**/jesture_sdk/third_party
+
+**/python_demo/emoji
+**/python_demo/out_data
+**/python_demo/label_tool
+**/python_demo/netron
+**/python_demo/notebooks
+**/python_demo/mediapipe
+
+# ------------- Python-specific ignore -------------
+
+**/__pycache__
+
+# -------------- MacOS-specific ignore --------------
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# -------------- Common ignore -------------- 
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Jupyter notebook
+**/.ipynb_checkpoints
