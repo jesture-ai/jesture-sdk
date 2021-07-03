@@ -5,8 +5,8 @@
 **/err.txt
 **/out.txt
 
-**/dev
-**/misc
+**/releases
+
 **/mediapipe
 **/third_party
 
