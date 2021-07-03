@@ -3,8 +3,7 @@
 Official repo of Jesture AI SDK.
 
 ## Use-cases with Jesture AI SDK
-Immersive Gaming                                                                                                               | 
-Web apps                                                                                                
+Immersive Gaming | Web apps                                                                                          
 :----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: 
 ![gaming](docs/gifs/afterspell.gif)| ![web](docs/gifs/web.gif)
 
