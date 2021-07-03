@@ -36,17 +36,20 @@ logo_path = f'images/jesture_logo.png'
 logo_img, logo_alpha = load_image_with_alpha(logo_path, remove_borders=True)
 
 # set the ui elements positions
-left_box_tl = (70, 360)
-left_box_br = (200, 420)
+top_box_tl = (230, 10)
+top_box_br = (630, 70)
 
-right_box_tl = (450, 360)
+left_box_tl = (70, 360)
+left_box_br = (230, 420)
+
+right_box_tl = (420, 360)
 right_box_br = (580, 420)
 
 # set the text positions
 logo_loc = (10, 10)
-left_text_loc = (80, 390)
-right_text_loc = (460, 390)
-dynamic_text_loc = ((left_text_loc[0] + right_text_loc[0]) // 2, 50)
+left_text_loc = (80, 375)
+right_text_loc = (430, 375)
+dynamic_text_loc = (240, 25)
 font = ImageFont.truetype("fonts/Comfortaa-Light.ttf", 24)
 
 # start Jesture SDK Python runner
@@ -82,6 +85,7 @@ while(True):
     # draw ui elements
     frame = Image.fromarray(frame)
     draw = ImageDraw.Draw(frame, "RGBA")
+    draw.rectangle((top_box_tl, top_box_br), fill=(0, 0, 0, 127), outline=(235, 190, 63, 127))
     draw.rectangle((left_box_tl, left_box_br), fill=(0, 0, 0, 127), outline=(235, 190, 63, 127))
     draw.rectangle((right_box_tl, right_box_br), fill=(0, 0, 0, 127), outline=(235, 190, 63, 127))
     
