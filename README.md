@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="https://user-images.githubusercontent.com/17500203/126075885-0da5d897-9af6-4fad-b0f7-ac40635ee6c1.png" width=300>
+
 # Jesture AI SDK
 
 <!-- [![JestureAiSdkReadmeHeaderGithub](https://user-images.githubusercontent.com/17500203/124357142-a6c72580-dc22-11eb-8838-b59ca69ef1f6.png)](https://github.com/jesture-ai/jesture-sdk) -->
