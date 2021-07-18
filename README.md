@@ -54,3 +54,9 @@ If one wish to remove all the dependencies: `sudo bash remove.sh`.
 ### Windows
 
 SDK is not yet available on Windows. Stay tuned!
+
+### Attribution 
+
+See the `LICENSE` for more details on 3rd party software. 
+
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
