@@ -24,7 +24,7 @@ pyton annotation.py --cam_id=0
 ```
 **Note:** You need to do steps 1 and 2 from the Demo instructions to be able to use the SDK python wrapper. 
 
-<img src="https://github.com/jesture-ai/jesture-sdk/blob/main/docs/gifs/python_annotation_small.gif">
+<img src="https://github.com/jesture-ai/jesture-sdk/blob/main/docs/gifs/python_annotation_large.gif">
 
 Each time when a key ("0"-"9" in this case) is pressed the record is added to a dict and it is saved to `out_data/hand_keypoints_{datatime}.pkl` file.
 
