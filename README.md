@@ -1,10 +1,12 @@
 <div align="center">
 
+<img src="https://user-images.githubusercontent.com/17500203/126075885-0da5d897-9af6-4fad-b0f7-ac40635ee6c1.png" width=300>
+
 # Jesture AI SDK
 
 <!-- [![JestureAiSdkReadmeHeaderGithub](https://user-images.githubusercontent.com/17500203/124357142-a6c72580-dc22-11eb-8838-b59ca69ef1f6.png)](https://github.com/jesture-ai/jesture-sdk) -->
 
-**Gesture control made accessible.**
+**Real-time gesture control made accessible.**
 
 [![YouTube](https://img.shields.io/badge/videos-youtube-white)](https://www.youtube.com/watch?v=sxaZ_yLgtLk&list=PL4Z9jysfxyfj9F1Kfdy_4oXKX9-MESCpP&index=1)
 [![Twitter](https://img.shields.io/badge/news-twitter-1DA1F2)](https://twitter.com/jestureai)
@@ -20,7 +22,7 @@ Immersive Gaming | Web Apps
 :----------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: 
 ![gaming](docs/gifs/afterspell.gif)| ![web](docs/gifs/web.gif)
 
-Slides Control | Visial Effects                                                                                                         
+Slides Control | Visual Effects                                                                                                         
 :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------:
 ![slides](docs/gifs/slides.gif)| ![snap](docs/gifs/viz.gif)
 
@@ -49,8 +51,14 @@ jesture_sdk/
 
 If one wish to remove all the dependencies: `sudo bash remove.sh`.
 
-**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To acces them it requires priviledged access (`sudo`).
+**Note:** The script `install.sh` just copies the dependencies to `/usr/local/Cellar/jestureai/` and `/usr/local/opt/jestureai/` paths. To access them it requires priviledged access (`sudo`).
 
 ### Windows
 
 SDK is not yet available on Windows. Stay tuned!
+
+### Attribution 
+
+See the `LICENSE` for more details on 3rd party software. 
+
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
