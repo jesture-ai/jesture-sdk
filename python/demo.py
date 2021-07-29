@@ -9,11 +9,10 @@ import os
 
 sys.path.append(os.path.abspath(".."))
 
-from src.thread_camera import ThreadCamera
+from src.runner import JestureSdkRunner
 from src.utils import load_image_with_alpha, overlay_alpha
 from src.utils import draw_text, draw_multiline_text
-
-from jesture_sdk_python.jesture_sdk_python import JestureSdkRunner
+from src.thread_camera import ThreadCamera
 
 print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
 
@@ -104,7 +103,6 @@ while(True):
 
 # finish all jobs
 jesture_runner.stop_recognition()
-
 cap.stop()
 
 cv2.waitKey(1)

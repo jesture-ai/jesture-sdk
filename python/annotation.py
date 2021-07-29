@@ -12,11 +12,10 @@ import os
 
 sys.path.append(os.path.abspath(".."))
 
+from src.runner import JestureSdkRunner
 from src.utils import load_image_with_alpha, overlay_alpha
 from src.utils import draw_text, draw_multiline_text, draw_skeleton
 from src.thread_camera_draw import ThreadCameraDraw
-
-from jesture_sdk_python import JestureSdkRunner
 
 print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
 
@@ -103,7 +102,6 @@ if __name__ == "__main__":
                                       use_static_gestures=False, 
                                       use_dynamic_gestures=False)
     jesture_runner.start_recognition()
-    time.sleep(1)
     
     # start reading frames to display in the application window
     cap = ThreadCameraDraw(jesture_runner, 
@@ -112,7 +110,6 @@ if __name__ == "__main__":
                            hand_box_tl=mid_hand_box_tl, hand_box_br=mid_hand_box_br, 
                            draw_hand_box=False)
     cap.start()
-    time.sleep(1)
 
     # start the main loop
     while(True):
@@ -197,8 +194,8 @@ if __name__ == "__main__":
         print(f'Dumped.')
 
     # finish and close all resources
-    cap.stop()
     jesture_runner.stop_recognition()
+    cap.stop()
 
     cv2.waitKey(1)
     cv2.destroyWindow(name)
