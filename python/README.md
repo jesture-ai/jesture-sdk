@@ -1,4 +1,4 @@
-# python
+# Jesture SDK: Python
 
 Please check out the [Install](https://github.com/jesture-ai/jesture-sdk#install) section on the main page first.
 
