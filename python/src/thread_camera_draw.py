@@ -82,7 +82,7 @@ class ThreadCameraDraw:
                 right_keypoints[:,0] = display_width - right_keypoints[:,0]
             
             # draw skeletons using screen-sized hand keypoints
-#             frame = draw_skeleton(frame, left_keypoints)
+            frame = draw_skeleton(frame, left_keypoints)
             frame = draw_skeleton(frame, right_keypoints)
             
             # TODO: move all `ImageDraw` tasks to a separate thread or do it asynchronously
@@ -112,7 +112,7 @@ class ThreadCameraDraw:
                 scaled_right_keypoints, scale=scale, shift=shift_right if self.mirror else shift_left)
             
             # draw scaled keypoints
-#             frame = draw_skeleton(frame, scaled_left_keypoints, indices=False)
+            frame = draw_skeleton(frame, scaled_left_keypoints, indices=False)
             frame = draw_skeleton(frame, scaled_right_keypoints, indices=False)
             
             # save to the field

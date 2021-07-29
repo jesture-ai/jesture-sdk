@@ -11,7 +11,7 @@ import os
 
 logging.basicConfig(level=logging.DEBUG, format='(%(threadName)-10s) %(message)s')
 
-# Mac OS X specific stuff
+# ------------ Mac OS X specific stuff ------------
 ctypes.util.find_library("libSystem.B.dylib")
 # print('shutil.which("libSystem.B.dylib"):', shutil.which("libSystem.B.dylib"))
 # print('ctypes.CDLL("libSystem.B.dylib")._name:', ctypes.CDLL("libSystem.B.dylib")._name)
@@ -112,11 +112,7 @@ class JestureSdkRunner:
         'right_static': get_static_right_gesture
     }
     
-    def __init__(self, 
-                 cam_id=0, 
-                 use_tracking=True, 
-                 use_static_gestures=True, 
-                 use_dynamic_gestures=True):
+    def __init__(self, cam_id=0, use_tracking=True, use_static_gestures=True, use_dynamic_gestures=True):
         self.cam_id = cam_id
         self.use_tracking = use_tracking
         self.use_static_gestures = use_static_gestures
