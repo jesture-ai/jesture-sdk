@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/17500203/126075885-0da5d897-9af6-4fad-b0f7-ac40635ee6c1.png" width=300>
+<img src="https://user-images.githubusercontent.com/31474005/129585983-9779f886-717c-424d-81ba-a5190c6eabd8.png" width=300>
 
 # Jesture AI SDK
 
