@@ -17,7 +17,7 @@ from src.thread_camera import ThreadCamera
 print('cv2.__version__:', cv2.__version__)  # 4.1.2 recommended
 
 
-# pasrse args
+# parse args
 parser = argparse.ArgumentParser(description='Collect hand keypoints data for gesture recognition fitting.')
 parser.add_argument('--cam_id', type=int, default=0)
 args = parser.parse_args()
@@ -56,7 +56,8 @@ jesture_runner = JestureSdkRunner(
     cam_id=args.cam_id, 
     use_tracking=True, 
     use_static_gestures=True, 
-    use_dynamic_gestures=True)
+    use_dynamic_gestures=True
+)
 jesture_runner.start_recognition()
 
 # start reading frames to display in the application window

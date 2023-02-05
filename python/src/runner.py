@@ -26,11 +26,7 @@ if not jesturesdk_lib_path:
     print("Unable to find the specified library: {}".format(jesturesdk_lib_name))
     sys.exit()
 
-try:
-    jesture_lib = ctypes.CDLL(jesturesdk_lib_path)
-except OSError:
-    print("Unable to load the library from {}".format(jesturesdk_lib_path))
-    sys.exit()
+jesture_lib = ctypes.CDLL(jesturesdk_lib_path)
 
 # -------------- COMMON --------------
 
@@ -147,17 +143,17 @@ class JestureSdkRunner:
         return get_camera_height(self.instance)
     
     def get_gesture(self, gesture_type):
-        '''
+        """
         Get hand gesture by `gesture_type`.
-        '''
+        """
         
         method = JestureSdkRunner.GESTURE_METHOD_DICT[gesture_type]
         return method(self.instance).decode()
 
     def get_hand_keypoints(self, keypoints_type):
-        '''
+        """
         Get hand keypoints by `keypoints_type`.
-        '''
+        """
         
         method = JestureSdkRunner.HAND_KEYPOINTS_METHOD_DICT[keypoints_type]
         raw_keypoints = method(self.instance)
